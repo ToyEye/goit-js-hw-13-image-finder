@@ -8,41 +8,73 @@ const BASE_URL = 'https://pixabay.com/api'
 //         .then(data => data);
 // }
     
-export default class ApiService{
-    constructor(){
+export default class ApiServer {
+    constructor() {
         this.searchQuery = '';
         this.page = 1;
     }
-            
-    fetchPhoto (){
-        if(this.searchQuery.trim() === ''){
-            return ;
-        }
-
+    
+    fetchPrhoto = () => {
         const url = `${BASE_URL}/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${KEY}`;
-         return fetch(url)
-            .then(r =>{
-                return r.json()})
-            .then(({hits}) => {
-
-                this.incrementPage();
-                return hits
-            });
+        return fetch(url).then(resp => resp.json()).then(data => {
+            this.incrementPage();
+            return data.hits;
+        });
     }
 
-    incrementPage(){
-        this.page +=1;
+    incrementPage = () => {
+        this.page += 1;
     }
 
-    resetPage() {
+    resetPage = () => {
         this.page = 1;
-      }
+    }
 
-    get query(){
+    get query() {
         return this.searchQuery;
     }
-    set query(newQuery){
+
+    set query(newQuery) {
         this.searchQuery = newQuery;
     }
-
 }
+
+
+// export default class ApiService{
+//     constructor(){
+//         this.searchQuery = '';
+//         this.page = 1;
+//     }
+            
+//     fetchPhoto (){
+//         if(this.searchQuery.trim() === ''){
+//             return ;
+//         }
+
+//         const url = `${BASE_URL}/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${KEY}`;
+//          return fetch(url)
+//             .then(r =>{
+//                 return r.json()})
+//             .then(({hits}) => {
+
+//                 this.incrementPage();
+//                 return hits
+//             });
+//     }
+
+//     incrementPage(){
+//         this.page +=1;
+//     }
+
+//     resetPage() {
+//         this.page = 1;
+//       }
+
+//     get query(){
+//         return this.searchQuery;
+//     }
+//     set query(newQuery){
+//         this.searchQuery = newQuery;
+//     }
+
+// }
