@@ -1,29 +1,39 @@
 import './sass/main.scss';
-import  ApiService  from "./partials/js/apiService.js";
+import  ApiServer  from "./partials/js/apiService.js";
 import  gallery  from "./partials/templates/gallery.hbs";
 
 const form = document.querySelector('#search-form');
 const galleryContainer = document.querySelector('.js-container__gallery');
+const newApi = new ApiServer();
+const loadMoreBtn = document.querySelector('.js-loadMoreBtn');
 
-form.addEventListener('submit', onSearchFormSubmit);
+form.addEventListener('submit', onSearchForm);
+loadMoreBtn.addEventListener('click', onLoadBtn);
 
-// function handler(e) {
-//     e.preventDefault();
-//     const input = e.target.query;
-//     apiSrevice(input.value).then(data => {
-//         markUpCards(gallery(data));
-//         return;
-//     })
+
+function onSearchForm(evt) {
+    evt.preventDefault();
+    clearMarkUp();
+    newApi.resetPage();
+    const inputValue = evt.target.elements.query.value.trim();
+    newApi.query = inputValue;
+    newApi.fetchPrhoto().then(pictureMarkUp)
+}
+
+function pictureMarkUp(picture) {
+    galleryContainer.insertAdjacentHTML('beforeend', gallery(picture));
+}
+function onLoadBtn() {
+   
+    
+}
+
+function clearMarkUp() {
+    galleryContainer.innerHTML = '';
+}
     
 
-//     function markUpCards(markup) {
-//         galleryContainer.innerHTML = '';
-//         if (markup) {
-//             galleryContainer.insertAdjacentHTML('beforeend', markup);
-//             return;
-//         }
-//     }
-// }
+
 
 
 // function onSearchFormSubmit(e){
