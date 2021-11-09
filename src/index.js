@@ -1,20 +1,24 @@
 import './sass/main.scss';
 import  ApiServer  from "./partials/js/apiService.js";
 import  gallery  from "./partials/templates/gallery.hbs";
+import LoadBtn from "./partials/js/loadBtn.js";
 
 const form = document.querySelector('#search-form');
 const galleryContainer = document.querySelector('.js-container__gallery');
 const newApi = new ApiServer();
-const loadMoreBtn = document.querySelector('.js-loadMoreBtn');
+const loadMoreBtn = new LoadBtn({ hidden: true });
+console.log("~ loadMoreBtn", loadMoreBtn)
 
 form.addEventListener('submit', onSearchForm);
-loadMoreBtn.addEventListener('click', onLoadBtn);
+// loadMoreBtn.addEventListener('click', onLoadBtn);
 
 
 function onSearchForm(evt) {
     evt.preventDefault();
+
     clearMarkUp();
     newApi.resetPage();
+
     const inputValue = evt.target.elements.query.value.trim();
     newApi.query = inputValue;
     newApi.fetchPrhoto().then(pictureMarkUp)
