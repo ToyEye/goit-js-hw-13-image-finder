@@ -7,15 +7,15 @@ const form = document.querySelector('#search-form');
 const galleryContainer = document.querySelector('.js-container__gallery');
 const newApi = new ApiServer();
 const loadMoreBtn = new LoadBtn({ hidden: true });
-console.log("~ loadMoreBtn", loadMoreBtn)
+
 
 form.addEventListener('submit', onSearchForm);
-// loadMoreBtn.addEventListener('click', onLoadBtn);
+loadMoreBtn.loadbtn.addEventListener('click', onLoadBtn);
 
 
 function onSearchForm(evt) {
     evt.preventDefault();
-
+    loadMoreBtn.show();
     clearMarkUp();
     newApi.resetPage();
 
@@ -28,12 +28,19 @@ function pictureMarkUp(picture) {
     galleryContainer.insertAdjacentHTML('beforeend', gallery(picture));
 }
 function onLoadBtn() {
-   
-    
+    newApi.fetchPrhoto().then(pictureMarkUp);
+    newApi.incrementPage();
+    setTimeout(() => {
+        galleryContainer.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+        })
+    }, 1000);
 }
 
 function clearMarkUp() {
     galleryContainer.innerHTML = '';
+    
 }
     
 

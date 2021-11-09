@@ -44,15 +44,33 @@ li {
   text-align: center;
 }
 
+.title {
+  margin-bottom: 15px;
+  line-height: 1.35;
+}
+
 .btn {
   padding: 5px 20px;
   border-radius: 10px;
+  background-color: beige;
+}
+
+.btn:hover,
+.btn:focus {
+  color: rgb(57, 170, 245);
+  background-color: rgba(170, 170, 158, 0.39);
 }
 
 .search__input {
   padding: 5px 20px;
   margin-right: 10px;
   border-radius: 10px;
+}
+
+.search__input:hover,
+.search__input:focus {
+  color: rgb(57, 170, 245);
+  background-color: rgba(170, 170, 158, 0.39);
 }
 
 .gallery {
@@ -91,6 +109,22 @@ li {
   margin-right: 8px;
 }
 
+.btn__load {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  padding: 5px 20px;
+  border-radius: 10px;
+  background-color: beige;
+}
+
 .isHide {
   display: none;
+}
+
+.btn__load:hover,
+.btn__load:focus {
+  color: rgb(57, 170, 245);
+  background-color: rgba(170, 170, 158, 0.39);
 }

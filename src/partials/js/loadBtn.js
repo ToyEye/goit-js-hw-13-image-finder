@@ -1,16 +1,14 @@
-class LoadButton {
+export default class LoadButton {
     constructor({hidden = false}) {
         this.loadbtn = document.querySelector('.js-loadMoreBtn');
         hidden && this.hide();
     };
 
     show = () => {
-        this.loadbtn.classList.remove('.isHide');
+        this.loadbtn.classList.remove('isHide');
     }
 
     hide = () => {
-        this.loadbtn.classList.add('.isHide');       
+        this.loadbtn.classList.add('isHide');       
     }
 }
-
-const btn = new LoadButton()
